@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Search from './components/Search/Search';
+import ListProducts from './components/ListProducts/ListProducts';
+import ItemDetail from './components/ItemDetail/ItemDetail';
 
-function App() {
+function App() {const [products, setProducts] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Search setProducts={setProducts} />} />
+        <Route path="/items" element={<ListProducts setProducts={setProducts}  products={products} />} />
+        <Route path="/items/:id" element={<ItemDetail  setProducts={setProducts}/>}/>
+        {/* Otros componentes y rutas */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
